@@ -8,8 +8,10 @@ import * as cocossd from "@tensorflow-models/coco-ssd"
 import Webcam from "react-webcam";
 
 import "./App.css";
+
 // 2. TODO - Import drawing utility here
 // e.g. import { drawRect } from "./utilities";
+import { drawRect } from "./utilities";
 
 
 
@@ -52,15 +54,16 @@ function App() {
       // 4. TODO - Make Detections
       // e.g. const obj = await net.detect(video);
 
-      // obj = detected object
+      // obj = our detected object
       const obj = await net.detect(video)
       console.log(obj)
 
-      // Draw mesh - draw graphics
+      // Draw mesh - our Canvas
       const ctx = canvasRef.current.getContext("2d");
 
       // 5. TODO - Update drawing utility
       // drawSomething(obj, ctx)  
+      drawRect(obj, ctx)
 
     }
   };
