@@ -1,9 +1,9 @@
 // Import dependencies
 import React, { useRef, useState, useEffect } from "react";
+
 import * as tf from "@tensorflow/tfjs";
 // 1. TODO - Import required model here ** DONE **
-// e.g. import * as tfmodel from "@tensorflow-models/tfmodel";
-import * as cocossd from "@tensorflow-models/coco-ssd"
+import * as cocoSsd from "@tensorflow-models/coco-ssd"
 
 import Webcam from "react-webcam";
 
@@ -23,7 +23,7 @@ function App() {
   const runCoco = async () => {
     // 3. TODO - Load network ** DONE **
     // e.g. const net = await cocossd.load();
-    const net = await cocossd.load()
+    const net = await cocoSsd.load()
     
     //  Loop and detect hands
     setInterval(() => {
@@ -55,26 +55,31 @@ function App() {
       // e.g. const obj = await net.detect(video);
 
       // obj = our detected object
-      const obj = await net.detect(video)
-      console.log(obj)
+      const detectedObject = await net.detect(video)
+      // console.log('object data:', obj)
 
       // Draw mesh - our Canvas
       const ctx = canvasRef.current.getContext("2d");
 
       // 5. TODO - Update drawing utility
       // drawSomething(obj, ctx)  
-      drawRect(obj, ctx)
+      drawRect(detectedObject, ctx)
 
     }
   };
 
-  useEffect(()=>{runCoco()},[]);
+  // useEffect(()=>{runCoco()},[]);
+  useEffect(()=>{
+    runCoco()
+  });
 
   return (
     <div className="App">
       <header className="App-header">
         <Webcam
+        // Props for Webcam
           ref={webcamRef}
+          audio={false}
           muted={true} 
           style={{
             position: "absolute",
@@ -85,7 +90,7 @@ function App() {
             textAlign: "center",
             zindex: 9,
             width: 640,
-            height: 480,
+            height: 360,
           }}
         />
 
@@ -100,7 +105,7 @@ function App() {
             textAlign: "center",
             zindex: 8,
             width: 640,
-            height: 480,
+            height: 360,
           }}
         />
       </header>

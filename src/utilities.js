@@ -2,16 +2,16 @@
 
 // detections = object detected (obj)
 
-export const drawRect = (detections, ctx) => {
+export const drawRect = (detectedObject, ctx) => {
   // console.log(detections, ctx)
 
-  detections.forEach((prediction) => {
+  detectedObject.forEach((prediction) => {
     // Get detected results:
     const [x, y, width, height] = prediction['bbox']
     const text = prediction['class']
 
     // Set styling:
-    const color = 'green'
+    const color = 'red'
     ctx.strokeStyle = color
     ctx.font = '18px Arial'
     ctx.fillStyle = color
