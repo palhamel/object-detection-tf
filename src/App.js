@@ -51,14 +51,17 @@ function App() {
 
       // 4. TODO - Make Detections
       // e.g. const obj = await net.detect(video);
+
+      // obj = detected object
       const obj = await net.detect(video)
       console.log(obj)
 
-      // Draw mesh
+      // Draw mesh - draw graphics
       const ctx = canvasRef.current.getContext("2d");
 
       // 5. TODO - Update drawing utility
       // drawSomething(obj, ctx)  
+
     }
   };
 
