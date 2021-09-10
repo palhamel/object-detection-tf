@@ -21,7 +21,7 @@ function App() {
   const [imgSrc, setImgSrc] = React.useState(null)
 
   const capture = React.useCallback(() => {
-    const imageSrc = webcamRef.current.getScreenshot()
+    const imageSrc = webcamRef.current.getScreenshot({width: 300, height: 220})
     setImgSrc(imageSrc)
   }, [webcamRef, setImgSrc])
   // ------------------------------------
@@ -59,7 +59,12 @@ function App() {
 
       // Make Detections / classify the image:
       const detectedObject = await model.detect(video)
-      // console.log('object data detected:', detectedObject)
+      console.log('object data detected:', detectedObject)
+
+      // Make object based actions:
+      if(detectedObject[0].class === 'person') {
+        console.log('PERSON')
+      } 
 
       // Draw mesh - our Canvas
       const ctx = canvasRef.current.getContext('2d')
@@ -78,11 +83,12 @@ function App() {
 
   return (
     <div className='App'>
-      {/* NOTE: Still image capture button: */}
-      <button onClick={capture}>Capture Photo</button>
-      {imgSrc && (
-        <img src={imgSrc} alt='Screen shot' width='300' height='220' />
-      )}
+        {/* NOTE: Still image capture button: */}
+        <button onClick={capture}>Capture Photo</button>
+        {imgSrc && (
+          <img src={imgSrc} alt='Screen shot' />
+          // <img src={imgSrc} alt='Screen shot' width='300' height='220' />
+        )}
 
       <header className='App-header'>
         <Webcam
@@ -101,7 +107,7 @@ function App() {
             width: 640,
             height: 360,
           }}
-          screenshotFormat='image/jpeg'
+          screenshotFormat='image/webp'
         />
 
         <canvas
