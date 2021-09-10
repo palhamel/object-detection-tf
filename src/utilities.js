@@ -4,8 +4,8 @@
 
 export const drawRect = (detectedObject, ctx) => {
   // console.log(detectedObject, ctx)
-  // console.log(detectedObject[0])
-  console.log(ctx)
+  // console.log(detectedObject[0].class)
+  // console.log(ctx)
 
   detectedObject.forEach((detection) => {
     // Get detected results:
@@ -13,19 +13,42 @@ export const drawRect = (detectedObject, ctx) => {
     const text = detection['class']
 
     // Make if else around 'class' for diffrent colors
+    const classObject = detection.class
 
-    // Set styling:
-    const color = 'red'
-    ctx.strokeStyle = color
-    ctx.lineWidth = 4
-    ctx.font = '18px Arial'
-    ctx.fillStyle = color
-    ctx.textAlign = "end"
+    // console.log(classObject)
 
-    // Draw rectangles and text:
-    ctx.beginPath()
-    ctx.fillText(text, x, y)
-    ctx.rect(x, y, width, height)
-    ctx.stroke()
+    if (classObject === 'person') {
+      
+      // Set styling:
+      const color = 'red'
+      ctx.strokeStyle = color
+      ctx.lineWidth = 3
+      ctx.font = '18px Arial bold'
+      ctx.fillStyle = color
+      ctx.textAlign = "start"
+  
+      // Draw rectangles and text:
+      ctx.beginPath()
+      ctx.fillText(text, x, y)
+      ctx.rect(x, y, width, height)
+      ctx.stroke()
+      
+    } else {
+
+      // Set styling:
+      const color = 'yellow'
+      ctx.strokeStyle = color
+      ctx.lineWidth = 2
+      ctx.font = '18px Arial'
+      ctx.fillStyle = color
+      ctx.textAlign = "start"
+  
+      // Draw rectangles and text:
+      ctx.beginPath()
+      ctx.fillText(text, x, y)
+      ctx.rect(x, y, width, height)
+      ctx.stroke()
+      
+    }
   })
 }
