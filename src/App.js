@@ -1,23 +1,27 @@
 // Import dependencies
 import React, { useRef, useState, useEffect } from "react";
-
 import * as tf from "@tensorflow/tfjs";
-//  Import required model here ** DONE **
+//  Import required model:
 import * as cocoSsd from "@tensorflow-models/coco-ssd"
-
+// Import react-webcam:
 import Webcam from "react-webcam";
 
+// Import styling:
 import "./App.css";
 
-// 2. TODO - Import drawing utility here
-// e.g. import { drawRect } from "./utilities";
+// Import drawing utility here:
 import { drawRect } from "./utilities";
-
-
 
 function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+
+  // Still image capture:
+  const [imgSrc, setImgSrc] = React.useState(null);
+  const capture = React.useCallback(() => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    setImgSrc(imageSrc);
+  }, [webcamRef, setImgSrc]);
 
   // Main function
   const runCoco = async () => {
@@ -69,10 +73,16 @@ function App() {
   
   useEffect(()=>{
     runCoco()
+    
   });
 
   return (
     <div className="App">
+
+      <button onClick={capture}>Capture Photo</button>
+      {imgSrc && (<img src={imgSrc} alt=""/>)}
+
+
       <header className="App-header">
         <Webcam
         // Props for Webcam
@@ -102,10 +112,10 @@ function App() {
             right: 0,
             textAlign: "center",
             zindex: 8,
-            width: 640,
+            width: 480,
             height: 360,
           }}
-        />
+          />
       </header>
     </div>
   );

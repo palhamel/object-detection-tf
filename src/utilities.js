@@ -23,7 +23,7 @@ export const drawRect = (detectedObject, ctx) => {
       const color = 'red'
       ctx.strokeStyle = color
       ctx.lineWidth = 3
-      ctx.font = '18px Arial bold'
+      ctx.font = '24px Verdana'
       ctx.fillStyle = color
       ctx.textAlign = "start"
   
@@ -39,7 +39,7 @@ export const drawRect = (detectedObject, ctx) => {
       const color = 'yellow'
       ctx.strokeStyle = color
       ctx.lineWidth = 2
-      ctx.font = '18px Arial'
+      ctx.font = '24px Arial'
       ctx.fillStyle = color
       ctx.textAlign = "start"
   
