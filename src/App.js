@@ -1,8 +1,12 @@
 // Import dependencies
-import React, { useRef, useState, useEffect } from 'react'
-import * as tf from '@tensorflow/tfjs'
+// import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
+// import * as tf from '@tensorflow/tfjs'
+import '@tensorflow/tfjs'
+
 //  Import required model:
 import * as cocoSsd from '@tensorflow-models/coco-ssd'
+
 // Import react-webcam:
 import Webcam from 'react-webcam'
 
@@ -21,7 +25,10 @@ function App() {
   const [imgSrc, setImgSrc] = React.useState(null)
 
   const capture = React.useCallback(() => {
-    const imageSrc = webcamRef.current.getScreenshot({width: 300, height: 220})
+    const imageSrc = webcamRef.current.getScreenshot({
+      width: 300,
+      height: 220,
+    })
     setImgSrc(imageSrc)
   }, [webcamRef, setImgSrc])
   // ------------------------------------
@@ -62,9 +69,9 @@ function App() {
       console.log('object data detected:', detectedObject)
 
       // Make object based actions:
-      if(detectedObject[0].class === 'person') {
+      if (detectedObject[0].class === 'person') {
         console.log('PERSON')
-      } 
+      }
 
       // Draw mesh - our Canvas
       const ctx = canvasRef.current.getContext('2d')
@@ -83,12 +90,12 @@ function App() {
 
   return (
     <div className='App'>
-        {/* NOTE: Still image capture button: */}
-        <button onClick={capture}>Capture Photo</button>
-        {imgSrc && (
-          <img src={imgSrc} alt='Screen shot' />
-          // <img src={imgSrc} alt='Screen shot' width='300' height='220' />
-        )}
+      {/* NOTE: Still image capture button: */}
+      <button onClick={capture}>Capture Photo</button>
+      {imgSrc && (
+        <img src={imgSrc} alt='Screen shot' />
+        // <img src={imgSrc} alt='Screen shot' width='300' height='220' />
+      )}
 
       <header className='App-header'>
         <Webcam
