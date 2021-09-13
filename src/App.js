@@ -46,6 +46,8 @@ function App() {
 
   const detect = async (model) => {
     // Check data is available
+        // FIXME: When detection is empty === undefined, crashes app
+        console.log(webcamRef.current);
     if (
       typeof webcamRef.current !== 'undefined' &&
       webcamRef.current !== null &&
@@ -66,12 +68,16 @@ function App() {
 
       // Make Detections / classify the image:
       const detectedObject = await model.detect(video)
-      console.log('object data detected:', detectedObject)
+
+  
+      // console.log('object data detected:', detectedObject[0])
+
+      // console.log(typeof(detectedObject));
 
       // Make object based actions:
-      if (detectedObject[0].class === 'person') {
-        console.log('PERSON')
-      }
+      // if (detectedObject[0].class === 'person') {
+      //   console.log('PERSON')
+      // }
 
       // Draw mesh - our Canvas
       const ctx = canvasRef.current.getContext('2d')

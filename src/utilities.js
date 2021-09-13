@@ -4,7 +4,7 @@
 
 export const drawRect = (detectedObject, ctx) => {
   // console.log(detectedObject, ctx)
-  // console.log(detectedObject[0].class)
+  console.log(detectedObject[0].class)
   // console.log(ctx)
 
   detectedObject.forEach((detection) => {
@@ -12,7 +12,7 @@ export const drawRect = (detectedObject, ctx) => {
     const [x, y, width, height] = detection['bbox']
     const text = detection['class']
 
-    // Make if else around 'class' for diffrent colors
+    // Make if else around 'class' for different colors
     const classObject = detection.class
 
     // console.log(classObject)
